@@ -10,7 +10,6 @@ class ApiService {
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
 
-      // Tampilkan JSON di console
       print(jsonEncode(data));
 
       return data;

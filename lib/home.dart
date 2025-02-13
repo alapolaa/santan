@@ -48,14 +48,21 @@ class _TanamanScreenState extends State<TanamanScreen> {
                   children: [
                     // Gambar
                     Image.network(
-                      "http://192.168.110.202/be_santan/${tanaman['gambar']}",
+                      "${ApiService.baseUrl.replaceAll('/api', '')}/${tanaman['gambar']}",
                       height: 200,
                       width: double.infinity,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
-                        return Image.asset('assets/no_image.png', height: 200, width: double.infinity);
+                        return Container(
+                          height: 200,
+                          width: double.infinity,
+                          color: Colors.grey[300],
+                          child: Center(child: Text("Gambar tidak tersedia")),
+                        );
                       },
                     ),
+
+
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: Column(
