@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'detail_tanaman.dart';
 import 'models/tanaman_service.dart';
-
+import 'add_tanaman.dart'; // Import halaman tambah tanaman
 
 class TanamanScreen extends StatefulWidget {
   @override
@@ -18,6 +18,12 @@ class _TanamanScreenState extends State<TanamanScreen> {
   void initState() {
     super.initState();
     tanamanFuture = apiService.getTanaman();
+  }
+
+  void _refreshTanaman() {
+    setState(() {
+      tanamanFuture = apiService.getTanaman();
+    });
   }
 
   @override
@@ -99,6 +105,20 @@ class _TanamanScreenState extends State<TanamanScreen> {
             },
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          bool? tanamanBaru = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddTanamanPage()),
+          );
+
+          if (tanamanBaru == true) {
+            _refreshTanaman();
+          }
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.green,
       ),
     );
   }
